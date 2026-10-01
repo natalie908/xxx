@@ -38,19 +38,18 @@ export interface Milestone {
   label: string
   icon: string
   text: string // zdravotní tvrzení (NHS)
-  costa: string // propojení s Kostarikou, bez nových zdravotních tvrzení
 }
 
 const D = 24 * 60
 
 export const MILESTONES: Milestone[] = [
-  { id: '20m', minutes: 20, label: '20 minut', icon: '💓', text: 'Tep a tlak se vracejí k normálu.', costa: 'První malý krok na cestě k pláži 🏖️' },
-  { id: '8h', minutes: 8 * 60, label: '8 hodin', icon: '🩸', text: 'Hladina oxidu uhelnatého v krvi klesne na polovinu a hladina kyslíku se vrací k normálu.', costa: 'Čas pomalu plánovat trasu po národních parcích 🗺️' },
-  { id: '48h', minutes: 48 * 60, label: '48 hodin', icon: '👃', text: 'Oxid uhelnatý je z těla pryč, plíce začínají čistit hlen, zlepšuje se chuť a čich.', costa: 'Casado ti bude chutnat víc 🍛' },
-  { id: '72h', minutes: 72 * 60, label: '72 hodin', icon: '⚡', text: 'Dýchá se snáz, přibývá energie.', costa: 'Výšlap k sopce s lepším dechem 🌋' },
-  { id: '2w', minutes: 14 * D, label: '2–12 týdnů', icon: '🔄', text: 'Zlepšuje se krevní oběh.', costa: 'Šnorchlování s lepší kondicí 🤿' },
-  { id: '3m', minutes: 91 * D, label: '3–9 měsíců', icon: '🫁', text: 'Ustupuje kašel a dušnost, plicní funkce se zlepšuje až o 10 %.', costa: 'Na další cestu za dobrodružstvím už můžeš pomalu spořit 🌎' },
-  { id: '1y', minutes: 365 * D, label: '1 rok', icon: '🏆', text: 'Riziko srdečních onemocnění je zhruba poloviční oproti kuřákům.', costa: 'Za rok si připiješ kokosem na tuhle cestu 🥥' },
+  { id: '20m', minutes: 20, label: '20 minut', icon: '💓', text: 'Tep a tlak se vracejí k normálu.' },
+  { id: '8h', minutes: 8 * 60, label: '8 hodin', icon: '🩸', text: 'Hladina oxidu uhelnatého v krvi klesne na polovinu a hladina kyslíku se vrací k normálu.' },
+  { id: '48h', minutes: 48 * 60, label: '48 hodin', icon: '👃', text: 'Oxid uhelnatý je z těla pryč, plíce začínají čistit hlen, zlepšuje se chuť a čich.' },
+  { id: '72h', minutes: 72 * 60, label: '72 hodin', icon: '⚡', text: 'Dýchá se snáz, přibývá energie.' },
+  { id: '2w', minutes: 14 * D, label: '2–12 týdnů', icon: '🔄', text: 'Zlepšuje se krevní oběh.' },
+  { id: '3m', minutes: 91 * D, label: '3–9 měsíců', icon: '🫁', text: 'Ustupuje kašel a dušnost, plicní funkce se zlepšuje až o 10 %.' },
+  { id: '1y', minutes: 365 * D, label: '1 rok', icon: '🏆', text: 'Riziko srdečních onemocnění je zhruba poloviční oproti kuřákům.' },
 ]
 
 export const NEUTRAL_MESSAGES = [

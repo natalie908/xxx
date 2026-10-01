@@ -151,7 +151,6 @@ export function Body({ data }: { data: AppData }) {
                     {!done && at && <span className="text-xs font-semibold text-ink/50">za {fmtDur(at - now)}</span>}
                   </p>
                   <p className="text-sm">{m.text}</p>
-                  <p className="mt-0.5 text-sm font-semibold text-sea-600">🌴 {m.costa}</p>
                   {beforeFlight && (
                     <span className="mt-1 inline-block rounded-full bg-sun-300/60 px-3 py-1 text-xs font-bold">
                       Tenhle stihneš ještě před odletem ✈️
