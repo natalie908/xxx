@@ -2,9 +2,10 @@ import { PRODUCTS } from '../data/defaults'
 import { ITEMS } from '../data/items'
 import type { AppData } from '../hooks/useAppData'
 import { priceOf } from '../lib/convert'
+import { itemName } from '../lib/texts'
 import { NumInput } from './NumInput'
 
-export function Settings({ data }: { data: AppData }) {
+export function Settings({ data, onEditTexts }: { data: AppData; onEditTexts: () => void }) {
   const { settings, setSettings } = data
 
   const setItemPrice = (id: string, n: number) =>
@@ -59,6 +60,10 @@ export function Settings({ data }: { data: AppData }) {
         </button>
       </section>
 
+      <button onClick={onEditTexts} className="press rounded-2xl bg-sea-500 py-4 text-lg font-bold text-white shadow">
+        ✏️ Upravit texty <span className="text-sm font-normal opacity-80">(Ctrl+E)</span>
+      </button>
+
       <section className="card p-4">
         <div className="mb-3 flex items-center justify-between">
           <h2 className="text-lg font-extrabold">Ceny v Kostarice</h2>
@@ -70,7 +75,7 @@ export function Settings({ data }: { data: AppData }) {
           {ITEMS.map((it) => (
             <li key={it.id} className="flex items-center gap-3">
               <span className="text-2xl">{it.emoji}</span>
-              <span className="flex-1 text-sm font-semibold leading-tight">{it.name}</span>
+              <span className="flex-1 text-sm font-semibold leading-tight">{itemName(it.id)}</span>
               <NumInput className="w-24" value={priceOf(it.id, settings.itemPrices)} onChange={(n) => setItemPrice(it.id, n)} />
             </li>
           ))}

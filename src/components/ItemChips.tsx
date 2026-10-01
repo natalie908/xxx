@@ -1,4 +1,5 @@
 import { ITEM_BY_ID } from '../data/items'
+import { itemName } from '../lib/texts'
 import type { Line } from '../lib/types'
 
 export function ItemChips({ lines }: { lines: Line[] }) {
@@ -12,7 +13,7 @@ export function ItemChips({ lines }: { lines: Line[] }) {
             <span className="text-xl leading-none">{it.emoji}</span>
             <span>
               {l.count > 1 && <b className="mr-1 text-coral-500">{l.count}×</b>}
-              {it.name}
+              {itemName(l.id)}
             </span>
           </li>
         )

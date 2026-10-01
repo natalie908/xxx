@@ -1,6 +1,7 @@
 import { ANIMALS } from '../data/animals'
 import { levelFor } from '../data/levels'
 import type { AppData } from '../hooks/useAppData'
+import { animalName } from '../lib/texts'
 
 export function Album({ data }: { data: AppData }) {
   const unlocked = Math.min(data.cravings.total, ANIMALS.length)
@@ -35,7 +36,7 @@ export function Album({ data }: { data: AppData }) {
               className={`flex aspect-square flex-col items-center justify-center rounded-2xl p-1 text-center ${open ? 'card' : 'bg-sand-200/60'}`}
             >
               <span className={`text-4xl leading-none ${open ? '' : 'silhouette'}`}>{a.emoji}</span>
-              <span className="mt-1 text-[10px] font-semibold leading-tight text-ink/70">{open ? a.name : '???'}</span>
+              <span className="mt-1 text-[10px] font-semibold leading-tight text-ink/70">{open ? animalName(i) : '???'}</span>
             </div>
           )
         })}

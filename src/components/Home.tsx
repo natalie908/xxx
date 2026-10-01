@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { levelFor } from '../data/levels'
 import type { AppData, CravingResult } from '../hooks/useAppData'
 import { daysUntil, czDays } from '../lib/date'
+import { ui } from '../lib/texts'
 import { bigCelebration, burst, buzz, pling, sunBurst } from '../lib/fx'
 import type { CleanDay, Kind } from '../lib/types'
 import { ConversionCard } from './ConversionCard'
@@ -63,7 +64,7 @@ export function Home({ data }: { data: AppData }) {
               {left > 0 ? `✈️ za ${left} ${czDays(left)}` : left === 0 ? '✈️ dnes letíš!' : '🌺 jsi tam!'}
             </span>
           </div>
-          <p className="mb-3 mt-1 text-sm text-white/85">Kostarika, listopad – dva týdny bez výčitek.</p>
+          <p className="mb-3 mt-1 text-sm text-white/85">{ui('tagline')}</p>
         </div>
         <Wave />
       </header>
@@ -101,7 +102,7 @@ export function Home({ data }: { data: AppData }) {
         >
           <span className="block text-6xl">🌊</span>
           <span className="mt-2 block text-2xl font-extrabold">Ustála jsem chuť</span>
-          <span className="block text-sm text-white/85">klepni pokaždé, když to zvládneš</span>
+          <span className="block text-sm text-white/85">{ui('cravingHint')}</span>
         </button>
 
         {reward && (
@@ -144,10 +145,10 @@ export function Home({ data }: { data: AppData }) {
         <ConversionCard
           emoji="🌴"
           tone="coral"
-          title="Tohle sis právě vzala z Kostariky:"
+          title={ui('buyTitle')}
           amount={card.amount}
           lines={card.lines}
-          footer="Žádný stres, další chuť zvládneš přepést 🌊"
+          footer={ui('buyFooter')}
           onReroll={() => data.rerollPurchase(card.id)}
           onClose={() => setCardId(null)}
         />
@@ -157,10 +158,10 @@ export function Home({ data }: { data: AppData }) {
         <ConversionCard
           emoji="🌞"
           tone="sun"
-          title="Tohle sis dnes zachránila na Kostariku:"
+          title={ui('cleanTitle')}
           amount={clean.amount}
           lines={clean.lines}
-          footer="Pura vida! Dnešek je tvůj ☀️"
+          footer={ui('cleanFooter')}
           onClose={() => setClean(null)}
         />
       )}

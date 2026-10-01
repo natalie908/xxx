@@ -2,9 +2,9 @@ import { useCallback, useRef } from 'react'
 import { DEFAULT_SETTINGS } from '../data/defaults'
 import { ANIMALS } from '../data/animals'
 import { isLevelUp } from '../data/levels'
-import { MESSAGES } from '../data/messages'
 import { convert } from '../lib/convert'
 import { dateKey } from '../lib/date'
+import { animalName, getMessages } from '../lib/texts'
 import type { CleanDay, Cravings, Kind, Purchase, Settings } from '../lib/types'
 import { useLocalStorage } from './useLocalStorage'
 
@@ -67,14 +67,16 @@ export function useAppData() {
     const total = cravings.total + 1
     setCravings({ total, byDate: { ...cravings.byDate, [key]: (cravings.byDate[key] ?? 0) + 1 } })
 
+    const messages = getMessages()
     let i: number
-    do i = Math.floor(Math.random() * MESSAGES.length)
-    while (i === lastMsg.current && MESSAGES.length > 1)
+    do i = Math.floor(Math.random() * messages.length)
+    while (i === lastMsg.current && messages.length > 1)
     lastMsg.current = i
 
     const isNew = total <= ANIMALS.length
-    const animal = isNew ? ANIMALS[total - 1] : ANIMALS[Math.floor(Math.random() * ANIMALS.length)]
-    return { message: MESSAGES[i], animal, isNew, levelUp: isLevelUp(total), total }
+    const ai = isNew ? total - 1 : Math.floor(Math.random() * ANIMALS.length)
+    const animal = { emoji: ANIMALS[ai].emoji, name: animalName(ai) }
+    return { message: messages[i], animal, isNew, levelUp: isLevelUp(total), total }
   }, [cravings, setCravings])
 
   const deletePurchase = (id: string) => setPurchases((p) => p.filter((x) => x.id !== id))

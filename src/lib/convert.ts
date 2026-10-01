@@ -1,4 +1,5 @@
 import { ITEMS, ITEM_BY_ID } from '../data/items'
+import { itemName } from './texts'
 import type { Line } from './types'
 
 const rand = <T,>(arr: T[]): T => arr[Math.floor(Math.random() * arr.length)]
@@ -35,7 +36,7 @@ export function convert(amount: number, overrides: Record<string, number> = {}):
     .sort((a, b) => priceOf(b.id, overrides) - priceOf(a.id, overrides))
 }
 
-export const lineText = (l: Line) => `${l.count > 1 ? `${l.count}× ` : ''}${ITEM_BY_ID[l.id].name}`
+export const lineText = (l: Line) => `${l.count > 1 ? `${l.count}× ` : ''}${itemName(l.id)}`
 
 export const linesText = (lines: Line[]) =>
   lines.length ? lines.map(lineText).join(' + ') : 'pár drobných na pohlednici 💌'

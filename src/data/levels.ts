@@ -1,3 +1,5 @@
+import { levelName } from '../lib/texts'
+
 export interface Level {
   at: number
   name: string
@@ -17,7 +19,8 @@ export function levelFor(total: number): { current: Level; next: Level | null } 
   let current = START_LEVEL
   for (const l of LEVELS) if (total >= l.at) current = l
   const next = LEVELS.find((l) => l.at > total) ?? null
-  return { current, next }
+  const named = (l: Level): Level => ({ ...l, name: levelName(l.at, l.name) })
+  return { current: named(current), next: next ? named(next) : null }
 }
 
 export const isLevelUp = (total: number) => LEVELS.some((l) => l.at === total)
