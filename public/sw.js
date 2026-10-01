@@ -1,7 +1,8 @@
-const CACHE = 'pura-vida-v1'
+const CACHE = 'pura-vida-v2'
+const BASE = self.registration.scope // např. https://natalie908.github.io/xxx/
 
 self.addEventListener('install', (e) => {
-  e.waitUntil(caches.open(CACHE).then((c) => c.addAll(['/', '/manifest.webmanifest', '/icon.svg'])))
+  e.waitUntil(caches.open(CACHE).then((c) => c.addAll([BASE, BASE + 'manifest.webmanifest', BASE + 'icon.svg'])))
   self.skipWaiting()
 })
 
@@ -21,10 +22,10 @@ self.addEventListener('fetch', (e) => {
       fetch(req)
         .then((res) => {
           const copy = res.clone()
-          caches.open(CACHE).then((c) => c.put('/', copy))
+          caches.open(CACHE).then((c) => c.put(BASE, copy))
           return res
         })
-        .catch(() => caches.match('/')),
+        .catch(() => caches.match(BASE)),
     )
     return
   }
