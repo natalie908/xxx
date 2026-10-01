@@ -101,7 +101,7 @@ export function Home({ data }: { data: AppData }) {
           className={`press rounded-[2rem] bg-gradient-to-br from-sea-400 via-sea-500 to-palm-500 px-6 py-8 text-white shadow-xl shadow-sea-500/40 ${bounce ? 'bounce' : ''}`}
         >
           <span className="block text-6xl">🌊</span>
-          <span className="mt-2 block text-2xl font-extrabold">Ustála jsem chuť</span>
+          <span className="mt-2 block text-2xl font-extrabold">{ui('cravingButton')}</span>
           <span className="block text-sm text-white/85">{ui('cravingHint')}</span>
         </button>
 
