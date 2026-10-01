@@ -1,14 +1,16 @@
 import { useCallback, useRef } from 'react'
 import { DEFAULT_SETTINGS } from '../data/defaults'
 import { ANIMALS } from '../data/animals'
+import { factsFor, type HealthFact } from '../data/health'
 import { isLevelUp } from '../data/levels'
 import { convert } from '../lib/convert'
 import { dateKey } from '../lib/date'
 import { animalName, getMessages } from '../lib/texts'
-import type { CleanDay, Cravings, Kind, Purchase, Settings } from '../lib/types'
+import type { Body, CleanDay, Cravings, Kind, Purchase, Settings } from '../lib/types'
 import { useLocalStorage } from './useLocalStorage'
 
 const EMPTY_CRAVINGS: Cravings = { total: 0, byDate: {} }
+const EMPTY_BODY: Body = { lastDose: null, wins: {} }
 const uid = () => Date.now().toString(36) + Math.random().toString(36).slice(2, 7)
 
 const reviveSettings = (raw: unknown): Settings => {
@@ -27,6 +29,7 @@ export interface CravingResult {
   isNew: boolean
   levelUp: boolean
   total: number
+  health: HealthFact
 }
 
 export function useAppData() {
@@ -34,15 +37,18 @@ export function useAppData() {
   const [purchases, setPurchases, resetPurchases] = useLocalStorage<Purchase[]>('pvf.purchases', [])
   const [cleanDays, setCleanDays, resetCleanDays] = useLocalStorage<CleanDay[]>('pvf.cleanDays', [])
   const [cravings, setCravings, resetCravings] = useLocalStorage<Cravings>('pvf.cravings', EMPTY_CRAVINGS)
+  const [body, setBody, resetBody] = useLocalStorage<Body>('pvf.body', EMPTY_BODY, (r) => ({ ...EMPTY_BODY, ...(r as Partial<Body>) }))
   const lastMsg = useRef(-1)
+  const lastFact = useRef('')
 
   const addPurchase = useCallback(
     (kind: Kind, amount: number): Purchase => {
       const p: Purchase = { id: uid(), ts: Date.now(), kind, amount, lines: convert(amount, settings.itemPrices) }
       setPurchases((prev) => [p, ...prev])
+      setBody((b) => ({ ...b, lastDose: Date.now() })) // nákup resetuje časovou osu těla
       return p
     },
-    [settings.itemPrices, setPurchases],
+    [settings.itemPrices, setPurchases, setBody],
   )
 
   const rerollPurchase = useCallback(
@@ -76,8 +82,16 @@ export function useAppData() {
     const isNew = total <= ANIMALS.length
     const ai = isNew ? total - 1 : Math.floor(Math.random() * ANIMALS.length)
     const animal = { emoji: ANIMALS[ai].emoji, name: animalName(ai) }
-    return { message: messages[i], animal, isNew, levelUp: isLevelUp(total), total }
-  }, [cravings, setCravings])
+    const pool = factsFor(settings.uses)
+    const choices = pool.length > 1 ? pool.filter((f) => f.id !== lastFact.current) : pool
+    const health = choices[Math.floor(Math.random() * choices.length)]
+    lastFact.current = health.id
+    setBody((b) => ({ ...b, wins: { ...b.wins, [health.id]: (b.wins[health.id] ?? 0) + 1 } }))
+
+    return { message: messages[i], animal, isNew, levelUp: isLevelUp(total), total, health }
+  }, [cravings, setCravings, settings.uses, setBody])
+
+  const setLastDose = (ms: number | null) => setBody((b) => ({ ...b, lastDose: ms }))
 
   const deletePurchase = (id: string) => setPurchases((p) => p.filter((x) => x.id !== id))
   const deleteCleanDay = (id: string) => setCleanDays((p) => p.filter((x) => x.id !== id))
@@ -87,11 +101,12 @@ export function useAppData() {
     resetPurchases()
     resetCleanDays()
     resetCravings()
+    resetBody()
   }
 
   return {
     settings, setSettings,
-    purchases, cleanDays, cravings,
+    purchases, cleanDays, cravings, body, setLastDose,
     cleanToday, todayCravings: cravings.byDate[today] ?? 0,
     addPurchase, rerollPurchase, addCleanDay, addCraving,
     deletePurchase, deleteCleanDay, resetAll,

@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { Body } from './components/Body'
 import { Album } from './components/Album'
 import { BottomNav, type Tab } from './components/BottomNav'
 import { Home } from './components/Home'
@@ -28,6 +29,7 @@ export default function App() {
   return (
     <div className="pb-28">
       {tab === 'home' && <Home data={data} />}
+      {tab === 'body' && <Body data={data} />}
       {tab === 'album' && <Album data={data} />}
       {tab === 'overview' && <Overview data={data} />}
       {tab === 'settings' && <Settings data={data} onEditTexts={() => setEditing(true)} />}

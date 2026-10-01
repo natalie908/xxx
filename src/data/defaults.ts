@@ -7,6 +7,7 @@ export const PRODUCTS: { kind: ProductKind; emoji: string; label: string }[] = [
 ]
 
 export const DEFAULT_SETTINGS: Settings = {
+  uses: 'both',
   prices: { cigs: 170, vape: 250, pod: 150 },
   itemPrices: {},
   dailySpend: 170,

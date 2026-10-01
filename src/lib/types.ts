@@ -22,7 +22,10 @@ export interface CleanDay {
   lines: Line[]
 }
 
+export type Uses = 'cigs' | 'vape' | 'both'
+
 export interface Settings {
+  uses: Uses
   prices: Record<ProductKind, number>
   itemPrices: Record<string, number>
   dailySpend: number
@@ -33,4 +36,9 @@ export interface Settings {
 export interface Cravings {
   total: number
   byDate: Record<string, number>
+}
+
+export interface Body {
+  lastDose: number | null // ms; začátek odpočtu času bez nikotinu
+  wins: Record<string, number> // id zdravotního faktu → kolikrát
 }

@@ -22,6 +22,23 @@ export function Settings({ data, onEditTexts }: { data: AppData; onEditTexts: ()
       <h1 className="text-2xl font-extrabold">Nastavení ⚙️</h1>
 
       <section className="card grid gap-3 p-4">
+        <h2 className="text-lg font-extrabold">Nikotin</h2>
+        <div>
+          <p className="mb-1 text-sm font-semibold">Užívám</p>
+          <div className="grid grid-cols-3 gap-1 rounded-2xl bg-sand-100 p-1">
+            {([['cigs', '🚬 Cigarety'], ['vape', '💨 Vape'], ['both', 'Obojí']] as const).map(([v, l]) => (
+              <button
+                key={v}
+                onClick={() => setSettings((s) => ({ ...s, uses: v }))}
+                aria-pressed={settings.uses === v}
+                className={`press rounded-xl py-2 text-sm font-bold ${settings.uses === v ? 'bg-white text-sea-600 shadow' : 'text-ink/60'}`}
+              >
+                {l}
+              </button>
+            ))}
+          </div>
+          <p className="mt-1 text-xs text-ink/60">Podle toho se vybírají zdravotní výhry v záložce Tělo.</p>
+        </div>
         <h2 className="text-lg font-extrabold">Ceny nikotinu</h2>
         {PRODUCTS.map((p) => (
           <div key={p.kind} className="flex items-center gap-3">

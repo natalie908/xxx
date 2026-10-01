@@ -117,6 +117,16 @@ export function Home({ data }: { data: AppData }) {
           </section>
         )}
 
+        {reward && (
+          <section key={`h${reward.n}`} className="card pop-in p-4" style={{ animationDelay: '.12s' }}>
+            <p className="text-xs font-bold uppercase tracking-wide text-sea-600">🫁 Pro tvoje tělo</p>
+            <p className="mt-1 flex items-center gap-2 text-lg font-extrabold">
+              <span className="text-2xl">{reward.health.emoji}</span> {reward.health.title}
+            </p>
+            <p className="mt-1 text-sm text-ink/70">{reward.health.text}</p>
+          </section>
+        )}
+
         <button
           onClick={onClean}
           disabled={cleanToday}
