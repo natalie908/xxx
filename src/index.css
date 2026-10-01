@@ -1,0 +1,76 @@
+@import 'tailwindcss';
+
+@theme {
+  --color-sea-50: #e8fbf9;
+  --color-sea-100: #c5f3ee;
+  --color-sea-400: #2cc9bf;
+  --color-sea-500: #0fb5ae;
+  --color-sea-600: #0a9399;
+  --color-sea-800: #075e66;
+  --color-palm-400: #4ccb8d;
+  --color-palm-500: #2eae6f;
+  --color-palm-700: #1b7a4c;
+  --color-sun-300: #ffd98a;
+  --color-sun-400: #ffc24d;
+  --color-sun-500: #ff9a3d;
+  --color-coral-400: #ff8068;
+  --color-coral-500: #f2634e;
+  --color-sand-50: #fffaf0;
+  --color-sand-100: #fdf3df;
+  --color-sand-200: #f6e4c3;
+  --color-sand-400: #d9bf8f;
+  --color-ink: #2b3a3f;
+  --font-sans: ui-rounded, 'SF Pro Rounded', 'Nunito', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+}
+
+html, body, #root { min-height: 100dvh; }
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  color: var(--color-ink);
+  background: linear-gradient(180deg, var(--color-sea-50) 0%, var(--color-sand-100) 45%, var(--color-sand-200) 100%) fixed;
+  -webkit-tap-highlight-color: transparent;
+  overscroll-behavior-y: none;
+}
+button { font-family: inherit; touch-action: manipulation; }
+input { font-family: inherit; }
+
+.card { background: rgba(255,255,255,.82); border-radius: 1.5rem; box-shadow: 0 6px 20px -10px rgba(7,94,102,.35); }
+.press { transition: transform .12s ease, filter .12s; }
+.press:active { transform: scale(.96); filter: brightness(.96); }
+
+@keyframes bounce-pop {
+  0% { transform: scale(1); }
+  25% { transform: scale(.88) rotate(-2deg); }
+  50% { transform: scale(1.12) rotate(2deg); }
+  75% { transform: scale(.97); }
+  100% { transform: scale(1); }
+}
+.bounce { animation: bounce-pop .6s cubic-bezier(.3,1.6,.5,1); }
+
+@keyframes pop-in {
+  0% { opacity: 0; transform: translateY(14px) scale(.85); }
+  100% { opacity: 1; transform: none; }
+}
+.pop-in { animation: pop-in .45s cubic-bezier(.3,1.5,.5,1) both; }
+
+@keyframes sheet-up { from { transform: translateY(100%); } to { transform: none; } }
+.sheet-up { animation: sheet-up .28s ease-out both; }
+@keyframes fade { from { opacity: 0; } to { opacity: 1; } }
+.fade { animation: fade .2s ease-out both; }
+
+@keyframes wave-move { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+.wave { animation: wave-move 9s linear infinite; width: 200%; }
+.wave.slow { animation-duration: 15s; animation-direction: reverse; }
+
+@keyframes sway { 0%,100% { transform: rotate(-6deg); } 50% { transform: rotate(6deg); } }
+.sway { display: inline-block; transform-origin: 50% 90%; animation: sway 4s ease-in-out infinite; }
+
+@keyframes wiggle { 0%,100% { transform: rotate(-8deg) scale(1);} 50% { transform: rotate(8deg) scale(1.1);} }
+.wiggle { animation: wiggle 1.6s ease-in-out infinite; }
+
+.silhouette { filter: grayscale(1) brightness(0); opacity: .18; }
+
+@media (prefers-reduced-motion: reduce) {
+  .wave, .sway, .wiggle { animation: none; }
+}

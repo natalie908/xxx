@@ -1,0 +1,48 @@
+export interface Animal {
+  emoji: string
+  name: string
+}
+
+// Pořadí = pořadí odemykání. U zvířat bez vlastního emoji je nejbližší zástupce.
+export const ANIMALS: Animal[] = [
+  { emoji: '🦥', name: 'Lenochod' },
+  { emoji: '🦜', name: 'Tukan' },
+  { emoji: '🐢', name: 'Mořská želva' },
+  { emoji: '🐦', name: 'Kolibřík' },
+  { emoji: '🐸', name: 'Rosnička červenooká' },
+  { emoji: '🦫', name: 'Kapybara' },
+  { emoji: '🦋', name: 'Motýl morpho' },
+  { emoji: '🐬', name: 'Delfín' },
+  { emoji: '🐒', name: 'Kapucínek' },
+  { emoji: '🦀', name: 'Krab poustevník' },
+  { emoji: '🐊', name: 'Krokodýl' },
+  { emoji: '🦎', name: 'Bazilišek' },
+  { emoji: '🐍', name: 'Zelený had' },
+  { emoji: '🐠', name: 'Tropická rybka' },
+  { emoji: '🦈', name: 'Žralok' },
+  { emoji: '🐙', name: 'Chobotnice' },
+  { emoji: '🐋', name: 'Velryba keporkak' },
+  { emoji: '🦩', name: 'Plameňák' },
+  { emoji: '🐆', name: 'Jaguár' },
+  { emoji: '🦉', name: 'Sova' },
+  { emoji: '🦅', name: 'Orel harpyje' },
+  { emoji: '🐜', name: 'Mravenec listořez' },
+  { emoji: '🐝', name: 'Včela' },
+  { emoji: '🪲', name: 'Brouk herkules' },
+  { emoji: '🦗', name: 'Cvrček' },
+  { emoji: '🦐', name: 'Garnát' },
+  { emoji: '🐚', name: 'Mušle' },
+  { emoji: '🥥', name: 'Kokos' },
+  { emoji: '🍍', name: 'Ananas' },
+  { emoji: '🥭', name: 'Mango' },
+  { emoji: '🍌', name: 'Banán' },
+  { emoji: '🌺', name: 'Hibišek' },
+  { emoji: '🌴', name: 'Palma' },
+  { emoji: '🌋', name: 'Sopka Arenal' },
+  { emoji: '🏄‍♀️', name: 'Surfařka' },
+  { emoji: '🌅', name: 'Západ slunce' },
+  { emoji: '☕', name: 'Kostarická káva' },
+  { emoji: '🍫', name: 'Kakao' },
+  { emoji: '🌈', name: 'Duha nad pralesem' },
+  { emoji: '🐗', name: 'Pekari' },
+]
